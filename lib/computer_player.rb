@@ -1,4 +1,4 @@
-class Computer
+class ComputerPlayer
   attr_writer :role
 
   COLORS = %w[R O Y G B V].freeze

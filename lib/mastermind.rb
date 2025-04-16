@@ -1,6 +1,6 @@
 # frozen_string_literal: false
 
-require_relative 'computer'
+require_relative 'computer_player'
 
 # Class that handles the logic for the game
 class Mastermind
@@ -8,7 +8,7 @@ class Mastermind
 
   def initialize
     @player_role = 'B' # Default role is to be the code breaker for now
-    @computer = Computer.new
+    @computer = ComputerPlayer.new
   end
 
   def start_game
