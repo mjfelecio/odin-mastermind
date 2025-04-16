@@ -62,7 +62,7 @@ class Mastermind
       end
       feedback << 'white' if @secret_code.include?(guess[idx])
     end
-    puts "Feedback: #{feedback.inspect}" # Randomize this before displaying
+    puts "Feedback: #{feedback.shuffle.inspect}"
   end
 
   def get_breaker_guess
