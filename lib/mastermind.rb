@@ -12,17 +12,8 @@ class Mastermind
   end
 
   def start_game
-    puts 'Welcome to Mastermind'
-    puts 'Colors:
-      R (Red)
-      O (Orange)
-      Y (Yelow)
-      G (Green)
-      B (Blue)
-      V (Violet)'
-    puts 'Type \'M\' to be the Code Maker and \'B\' to be the Code Breaker: '
-    @player_role = 'B' # Add a way to get input later, for now, the player is the breaker
-    @computer.role = @player_role == 'B' ? :code_maker : :code_breaker
+    print_title_info
+    prompt_player_role
     input_secret_code
 
     12.times do |i|
@@ -38,12 +29,11 @@ class Mastermind
   private
 
   def input_secret_code
-    if @player_role == 'B'
+    if @player_role == :code_breaker
       @secret_code = @computer.generate_secret_code
-    elsif @player_role == 'M'
-      puts 'Your secret code must be 4 letters
-            (Ex. RGBV or BYOG)
-            Enter your secret code:'
+    elsif @player_role == :code_maker
+      puts 'Your secret code must be 4 letters (Ex. RGBV or BYOG)'
+      puts 'Enter your secret code: '
       @secret_code = gets.chomp # Add a way to validate this later
     end
     puts "The secret code is: #{@secret_code}"
@@ -73,5 +63,42 @@ class Mastermind
       print 'Invalid input, try again: '
     end
     guess
+  end
+
+  def prompt_player_role
+    print 'Type \'M\' to be the Code Maker and \'B\' to be the Code Breaker: '
+
+    loop do
+      selected_role = gets.chomp
+
+      if %w[M B].include?(selected_role)
+        setup_player_roles(selected_role)
+        puts "You are the #{selected_role == 'M' ? 'CODE MAKER' : 'CODE BREAKER'}"
+        break
+      end
+
+      print 'Invalid role, try again: '
+    end
+  end
+
+  def setup_player_roles(selected_role)
+    if selected_role == 'M'
+      @player_role = :code_maker
+      @computer.role = :code_breaker
+    elsif selected_role == 'B'
+      @player_role = :code_breaker
+      @computer.role = :code_maker
+    end
+  end
+
+  def print_title_info
+    puts 'Welcome to Mastermind'
+    puts 'Colors:
+      R (Red)
+      O (Orange)
+      Y (Yelow)
+      G (Green)
+      B (Blue)
+      V (Violet)'
   end
 end
