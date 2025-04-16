@@ -25,7 +25,7 @@ class Mastermind
       row_num = i + 1
       guess = ''
       puts "Row ##{row_num} Guess:"
-      guess = gets.chomp # Add a way to validate guess input
+      guess = get_breaker_guess
       provide_feedback(guess)
     end
   end
@@ -62,6 +62,20 @@ class Mastermind
       end
       feedback << 'white' if @secret_code.include?(guess[idx])
     end
-    puts "Feedback: #{feedback.inspect}"
+    puts "Feedback: #{feedback.inspect}" # Randomize this before displaying
+  end
+
+  def get_breaker_guess
+    # TODO: Add better validation messages
+    # TODO: Add a way to get the computer guess
+    guess = ''
+    loop do
+      guess = gets.chomp
+
+      break if guess.length == 4 && guess.chars.all? { |c| COLORS.include?(c) }
+
+      print 'Invalid input, try again: '
+    end
+    guess
   end
 end
