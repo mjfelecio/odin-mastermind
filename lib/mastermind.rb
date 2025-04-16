@@ -26,6 +26,7 @@ class Mastermind
       guess = ''
       puts "Row ##{row_num} Guess:"
       guess = gets.chomp # Add a way to validate guess input
+      provide_feedback(guess)
     end
   end
 
@@ -41,7 +42,7 @@ class Mastermind
       @secret_code = gets.chomp # Add a way to validate this later
     end
     puts "The secret code is: #{@secret_code}"
-    puts "\n" * 10
+    # puts "\n" * 10
   end
 
   def generate_secret_code
@@ -50,5 +51,17 @@ class Mastermind
       secret_code << COLORS[rand(6)]
     end
     secret_code
+  end
+
+  def provide_feedback(guess)
+    feedback = []
+    @secret_code.split('').each_with_index do |color, idx|
+      if guess[idx] == color && @secret_code.include?(guess[idx])
+        feedback << 'red'
+        next
+      end
+      feedback << 'white' if @secret_code.include?(guess[idx])
+    end
+    puts "Feedback: #{feedback.inspect}"
   end
 end
