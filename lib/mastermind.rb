@@ -1,5 +1,6 @@
 # frozen_string_literal: false
 
+require_relative 'human_player'
 require_relative 'computer_player'
 
 # Class that handles the logic for the game
@@ -7,7 +8,7 @@ class Mastermind
   COLORS = %w[R O Y G B V].freeze
 
   def initialize
-    @player_role = 'B' # Default role is to be the code breaker for now
+    @human = HumanPlayer.new
     @computer = ComputerPlayer.new
   end
 
@@ -29,12 +30,10 @@ class Mastermind
   private
 
   def input_secret_code
-    if @player_role == :code_breaker
+    if @human.role == :code_breaker
       @secret_code = @computer.generate_secret_code
-    elsif @player_role == :code_maker
-      puts 'Your secret code must be 4 letters (Ex. RGBV or BYOG)'
-      puts 'Enter your secret code: '
-      @secret_code = gets.chomp # Add a way to validate this later
+    elsif @human.role == :code_maker
+      @secret_code = @human.prompt_for_secret_code
     end
     puts "The secret code is: #{@secret_code}"
     # puts "\n" * 10
@@ -42,8 +41,8 @@ class Mastermind
 
   def provide_feedback(guess)
     feedback = []
-    feedback = @computer.provide_feedback(@secret_code, guess) if @player_role == 'B'
-    # Add a way to get user feedback here
+    feedback = @computer.provide_feedback(@secret_code, guess) if @human.role == :code_breaker
+    feedback = @human.provide_feedback(@secret_code, guess) if @human.role == :code_maker
     puts "Feedback: #{feedback}"
   end
 
@@ -83,10 +82,10 @@ class Mastermind
 
   def setup_player_roles(selected_role)
     if selected_role == 'M'
-      @player_role = :code_maker
+      @human.role = :code_maker
       @computer.role = :code_breaker
     elsif selected_role == 'B'
-      @player_role = :code_breaker
+      @human.role = :code_breaker
       @computer.role = :code_maker
     end
   end

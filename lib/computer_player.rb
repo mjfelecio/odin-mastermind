@@ -1,11 +1,7 @@
 class ComputerPlayer
-  attr_writer :role
+  attr_accessor :role
 
   COLORS = %w[R O Y G B V].freeze
-
-  def initialize
-    @role = :code_maker
-  end
 
   def generate_secret_code
     secret_code = ''
