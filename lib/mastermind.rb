@@ -20,6 +20,13 @@ class Mastermind
     puts 'Type \'M\' to be the Code Maker and \'B\' to be the Code Breaker: '
     @player_role = 'B' # Add a way to get input later, for now, the player is the breaker
     input_secret_code
+
+    12.times do |i|
+      row_num = i + 1
+      guess = ''
+      puts "Row ##{row_num} Guess:"
+      guess = gets.chomp # Add a way to validate guess input
+    end
   end
 
   private
