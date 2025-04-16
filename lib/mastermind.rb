@@ -23,9 +23,10 @@ class Mastermind
 
     12.times do |i|
       row_num = i + 1
-      guess = ''
       puts "Row ##{row_num} Guess:"
       guess = get_breaker_guess
+      break if solved?(guess)
+
       provide_feedback(guess)
     end
   end
@@ -63,6 +64,10 @@ class Mastermind
       feedback << 'white' if @secret_code.include?(guess[idx])
     end
     puts "Feedback: #{feedback.shuffle.inspect}"
+  end
+
+  def solved?(guess)
+    guess == @secret_code
   end
 
   def get_breaker_guess
