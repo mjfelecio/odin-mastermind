@@ -18,15 +18,28 @@ class HumanPlayer
   end
 
   def provide_feedback(secret_code, guess)
+    # TODO: Refactor this later
     feedback = []
-    puts 'Provide feedback on the guess made by the computer: '
+    remaining_code = secret_code.chars
+
+    # Check for any red pegs
     secret_code.split('').each_with_index do |color, idx|
-      if guess[idx] == color && secret_code.include?(guess[idx])
-        feedback << 'red'
-        next
-      end
-      feedback << 'white' if secret_code.include?(guess[idx])
+      next unless guess[idx] == color
+
+      feedback << 'red'
+      remaining_code[idx] = nil
+      next
     end
+
+    # Check for any white pegs
+    guess.chars.each do |color|
+      next unless remaining_code.include?(color)
+
+      feedback << 'white'
+      guess_color_idx = remaining_code.find_index(color)
+      remaining_code[guess_color_idx] = nil
+    end
+
     feedback.shuffle.inspect
   end
 

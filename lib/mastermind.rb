@@ -36,7 +36,7 @@ class Mastermind
       @secret_code = @human.prompt_for_secret_code
     end
     puts "The secret code is: #{@secret_code}"
-    # puts "\n" * 10
+    puts "\n" * 20
   end
 
   def provide_feedback(guess)
