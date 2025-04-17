@@ -19,7 +19,7 @@ class Mastermind
 
     12.times do |i|
       row_num = i + 1
-      print "Row ##{row_num} Guess:"
+      print "Row ##{row_num} Guess: "
       guess = get_breaker_guess
       break if solved?(guess)
 
@@ -53,15 +53,7 @@ class Mastermind
   def get_breaker_guess
     # TODO: Add better validation messages
     # TODO: Add a way to get the computer guess
-    guess = ''
-    loop do
-      guess = gets.chomp
-
-      break if guess.length == 4 && guess.chars.all? { |c| COLORS.include?(c) }
-
-      print 'Invalid input, try again: '
-    end
-    guess
+    @human.guess
   end
 
   def prompt_player_role

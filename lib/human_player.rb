@@ -17,6 +17,18 @@ class HumanPlayer
     secret_code
   end
 
+  def guess
+    guess = ''
+    loop do
+      guess = gets.chomp
+
+      break if guess.length == 4 && guess.chars.all? { |c| COLORS.include?(c) }
+
+      print 'Invalid input, try again: '
+    end
+    guess
+  end
+
   def provide_feedback(secret_code, guess)
     # TODO: Refactor this later
     feedback = []
