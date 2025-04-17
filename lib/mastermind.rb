@@ -53,7 +53,10 @@ class Mastermind
   def get_breaker_guess
     # TODO: Add better validation messages
     # TODO: Add a way to get the computer guess
-    @human.guess
+    guess = ''
+    guess = @computer.guess if @human.role == :code_maker
+    guess = @human.guess if @human.role == :code_breaker
+    guess
   end
 
   def prompt_player_role

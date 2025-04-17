@@ -5,7 +5,7 @@ class HumanPlayer
 
   def prompt_for_secret_code
     puts 'Your secret code must be 4 letters (Ex. RGBV or BYOG)'
-    puts 'Enter your secret code: '
+    print 'Enter your secret code: '
     secret_code = nil
     loop do
       secret_code = gets.chomp # Add a way to validate this later

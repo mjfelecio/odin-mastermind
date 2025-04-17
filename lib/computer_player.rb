@@ -11,6 +11,16 @@ class ComputerPlayer
     secret_code
   end
 
+  def guess
+    guess = ''
+    4.times do
+      guess << COLORS[rand(6)]
+    end
+    sleep(1)
+    puts guess
+    guess
+  end
+
   def provide_feedback(secret_code, guess)
     # TODO: Refactor this later
     feedback = []
