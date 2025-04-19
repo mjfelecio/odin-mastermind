@@ -1,88 +1,42 @@
 # frozen_string_literal: false
 
+require_relative 'game_session'
 require_relative 'human_player'
 require_relative 'computer_player'
 
 # Class that handles the logic for the game
 class Mastermind
-  COLORS = %w[R O Y G B V].freeze
-
-  def initialize
-    @human = HumanPlayer.new
-    @computer = ComputerPlayer.new
-  end
-
   def start_game
     print_title_info
-    prompt_player_role
-    input_secret_code
+    starting_role = choose_starting_role
+    rounds = 12
 
-    12.times do |i|
-      row_num = i + 1
-      print "Row ##{row_num} Guess: "
-      guess = get_breaker_guess
-      break if solved?(guess)
+    GameSession.new(rounds, starting_role).start
+  end
 
-      provide_feedback(guess)
-    end
+  def setup
+    # Code that handles setting up the game like:
+    # - How many rounds the game should have
+    # - What the player starting role should be
   end
 
   private
 
-  def input_secret_code
-    if @human.role == :code_breaker
-      @secret_code = @computer.generate_secret_code
-    elsif @human.role == :code_maker
-      @secret_code = @human.prompt_for_secret_code
-    end
-    puts "The secret code is: #{@secret_code}"
-    puts "\n" * 20
-  end
-
-  def provide_feedback(guess)
-    feedback = []
-    feedback = @computer.provide_feedback(@secret_code, guess) if @human.role == :code_breaker
-    feedback = @human.provide_feedback(@secret_code, guess) if @human.role == :code_maker
-    puts "Feedback: #{feedback}"
-  end
-
-  def solved?(guess)
-    guess == @secret_code
-  end
-
-  def get_breaker_guess
-    # TODO: Add better validation messages
-    # TODO: Add a way to get the computer guess
-    guess = ''
-    guess = @computer.guess if @human.role == :code_maker
-    guess = @human.guess if @human.role == :code_breaker
-    guess
-  end
-
-  def prompt_player_role
+  def choose_starting_role
     print 'Type \'M\' to be the Code Maker and \'B\' to be the Code Breaker: '
 
+    starting_role = ''
     loop do
-      selected_role = gets.chomp
+      starting_role = gets.chomp
 
-      if %w[M B].include?(selected_role)
-        setup_player_roles(selected_role)
-        puts "You are the #{selected_role == 'M' ? 'CODE MAKER' : 'CODE BREAKER'}"
+      if %w[M B].include?(starting_role)
+        puts "You are the #{starting_role == 'M' ? 'CODE MAKER' : 'CODE BREAKER'}"
         break
       end
 
       print 'Invalid role, try again: '
     end
-  end
-
-  def setup_player_roles(selected_role)
-    if selected_role == 'M'
-      @human.role = :code_maker
-      @computer.role = :code_breaker
-    elsif selected_role == 'B'
-      @human.role = :code_breaker
-      @computer.role = :code_maker
-    end
+    starting_role
   end
 
   def print_title_info
