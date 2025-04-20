@@ -10,12 +10,17 @@ class GameSession
     @computer = ComputerPlayer.new
     setup_player_roles(starting_role)
     @curr_round = 1
+    @scores = {
+      human: 0,
+      computer: 0
+    }
   end
 
   def start
     is_solved = false
     @num_of_rounds.times do
       input_secret_code
+      rows_used = 12
 
       (1..12).each do |row_num|
         print "Row ##{row_num} Guess: "
@@ -23,18 +28,35 @@ class GameSession
 
         if solved?(guess)
           is_solved = true
+          rows_used = row_num
           break
         end
 
         provide_feedback(guess)
       end
 
+      handle_scores(rows_used)
       handle_win_lose(is_solved)
       handle_switching_rounds
     end
   end
 
   private
+
+  def handle_scores(rows_used)
+    if @human.role == :code_breaker
+      @scores[:computer] += rows_used
+    elsif @human.role == :code_maker
+      @scores[:human] += rows_used
+    end
+
+    display_scores
+  end
+
+  def display_scores
+    puts 'Score Board:'
+    puts "You: #{@scores[:human]} | Computer: #{@scores[:computer]}"
+  end
 
   def handle_switching_rounds
     puts "Round #{@curr_round} over, swapping roles..."
