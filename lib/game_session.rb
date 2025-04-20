@@ -19,11 +19,17 @@ class GameSession
       row_num = i + 1
       print "Row ##{row_num} Guess: "
       guess = get_breaker_guess
-      break if solved?(guess)
+
+      if solved?(guess)
+        winning_sequence
+        break
+      end
 
       provide_feedback(guess)
     end
   end
+
+  private
 
   def input_secret_code
     if @human.role == :code_breaker
@@ -44,6 +50,18 @@ class GameSession
 
   def solved?(guess)
     guess == @secret_code
+  end
+
+  def winning_sequence
+    winner = determine_winner
+    puts 'Congratulations! You won this round!~' if winner == @human
+    puts 'Womp womp. You lost to a computer lmao' if winner == @computer
+  end
+
+  def determine_winner
+    return @computer if @human.role == :code_maker
+
+    @human if @human.role == :code_breaker
   end
 
   def get_breaker_guess
