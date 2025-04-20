@@ -8,16 +8,32 @@ require_relative 'computer_player'
 class Mastermind
   def start_game
     print_title_info
-    starting_role = choose_starting_role
-    rounds = 12
+    rounds, starting_role = setup_game
 
     GameSession.new(rounds, starting_role).start
   end
 
-  def setup
-    # Code that handles setting up the game like:
-    # - How many rounds the game should have
-    # - What the player starting role should be
+  def setup_game
+    puts 'Press any key to set up the game or press (X) to proceed with the default settings:'
+    puts 'Default ~>= starting_role: code_breaker | rounds: 4 <=~'
+    # Default values
+    starting_role = 'B'
+    rounds = 4
+
+    return [rounds, starting_role] if gets.chomp == 'X'
+
+    starting_role = choose_starting_role
+
+    loop do
+      puts 'Number of Rounds: '
+
+      rounds = gets.chomp.to_i
+
+      break if rounds.even?
+
+      puts 'Error: Number of rounds must be even'
+    end
+    [rounds, starting_role]
   end
 
   private
