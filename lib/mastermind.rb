@@ -20,6 +20,8 @@ class Mastermind
     puts 'You won the game!' if winner == :human
   end
 
+  private
+
   def setup_game
     puts 'Press any key to set up the game or press (X) to proceed with the default settings:'
     puts 'Default ~>= starting_role: code_breaker | rounds: 4 <=~'
@@ -30,36 +32,34 @@ class Mastermind
     return [rounds, starting_role] if gets.chomp == 'X'
 
     starting_role = choose_starting_role
+    rounds = choose_num_of_rounds
+    puts "You are the #{starting_role == 'M' ? 'CODE MAKER' : 'CODE BREAKER'}"
 
-    loop do
-      puts 'Number of Rounds: '
-
-      rounds = gets.chomp.to_i
-
-      break if rounds.even?
-
-      puts 'Error: Number of rounds must be even'
-    end
     [rounds, starting_role]
   end
 
-  private
+  def choose_num_of_rounds
+    loop do
+      print 'Number of Rounds: '
+
+      rounds = gets.chomp.to_i
+
+      return rounds if rounds.even? && rounds >= 2
+
+      puts 'Error: Number of rounds must be even and at least 2'
+    end
+  end
 
   def choose_starting_role
     print 'Type \'M\' to be the Code Maker and \'B\' to be the Code Breaker: '
 
-    starting_role = ''
     loop do
       starting_role = gets.chomp
 
-      if %w[M B].include?(starting_role)
-        puts "You are the #{starting_role == 'M' ? 'CODE MAKER' : 'CODE BREAKER'}"
-        break
-      end
+      return starting_role if %w[M B].include?(starting_role)
 
       print 'Invalid role, try again: '
     end
-    starting_role
   end
 
   def print_title_info
