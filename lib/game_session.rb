@@ -14,6 +14,7 @@ class GameSession
   def start
     input_secret_code
     rounds = 12
+    is_solved = false
 
     rounds.times do |i|
       row_num = i + 1
@@ -21,12 +22,14 @@ class GameSession
       guess = get_breaker_guess
 
       if solved?(guess)
-        winning_sequence
+        is_solved = true
         break
       end
 
       provide_feedback(guess)
     end
+
+    handle_win_lose(is_solved)
   end
 
   private
@@ -52,16 +55,22 @@ class GameSession
     guess == @secret_code
   end
 
-  def winning_sequence
-    winner = determine_winner
-    puts 'Congratulations! You won this round!~' if winner == @human
-    puts 'Womp womp. You lost to a computer lmao' if winner == @computer
+  def handle_win_lose(is_solved)
+    human_solved_it = is_solved && @human.role == :code_breaker
+    computer_did_not_solve_it = !is_solved && @human.role == :code_maker
+    if human_solved_it || computer_did_not_solve_it
+      winning_sequence
+    else
+      losing_sequence
+    end
   end
 
-  def determine_winner
-    return @computer if @human.role == :code_maker
+  def losing_sequence
+    puts 'Womp womp. You lost to a computer lmao'
+  end
 
-    @human if @human.role == :code_breaker
+  def winning_sequence
+    puts 'Congratulations! You won this round!~'
   end
 
   def get_breaker_guess
