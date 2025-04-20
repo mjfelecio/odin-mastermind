@@ -10,7 +10,14 @@ class Mastermind
     print_title_info
     rounds, starting_role = setup_game
 
-    GameSession.new(rounds, starting_role).start
+    game_session = GameSession.new(rounds, starting_role)
+    game_session.start
+    display_result(game_session.fetch_winner)
+  end
+
+  def display_result(winner)
+    puts 'You lost the game!' if winner == :computer
+    puts 'You won the game!' if winner == :human
   end
 
   def setup_game

@@ -41,6 +41,12 @@ class GameSession
     end
   end
 
+  def fetch_winner
+    return :computer if @scores[:computer] > @scores[:human]
+
+    :human
+  end
+
   private
 
   def handle_scores(rows_used)
