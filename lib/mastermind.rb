@@ -10,6 +10,10 @@ class Mastermind
   def initialize
     @ui = MastermindUI.new
     @game_session = GameSession.new
+    @scores = {
+      human: 0,
+      computer: 0
+    }
     @game_options = {}
   end
 
