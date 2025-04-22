@@ -4,11 +4,11 @@ require_relative 'human_player'
 require_relative 'computer_player'
 
 class GameSession
-  def initialize(num_of_rounds, starting_role)
-    @num_of_rounds = num_of_rounds
+  attr_writer :num_of_rounds, :initial_role
+
+  def initialize
     @human = HumanPlayer.new
     @computer = ComputerPlayer.new
-    setup_player_roles(starting_role)
     @curr_round = 1
     @scores = {
       human: 0,
@@ -17,6 +17,7 @@ class GameSession
   end
 
   def start
+    setup_player_roles(@initial_role)
     is_solved = false
     @num_of_rounds.times do
       input_secret_code
