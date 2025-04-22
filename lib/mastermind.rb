@@ -3,11 +3,16 @@
 require_relative 'game_session'
 require_relative 'human_player'
 require_relative 'computer_player'
+require_relative 'mastermind_ui'
 
 # Class that handles the logic for the game
 class Mastermind
+  def initialize
+    @ui = MastermindUI.new
+  end
+
   def start_game
-    print_title_info
+    @ui.display_start_messages
     rounds, starting_role = setup_game
 
     game_session = GameSession.new(rounds, starting_role)
@@ -27,24 +32,24 @@ class Mastermind
     puts 'Default ~>= starting_role: code_breaker | rounds: 4 <=~'
     # Default values
     starting_role = 'B'
-    rounds = 4
+    num_of_rounds = 4
 
-    return [rounds, starting_role] if gets.chomp == 'X'
+    return [num_of_rounds, starting_role] if gets.chomp == 'X'
 
     starting_role = choose_starting_role
-    rounds = choose_num_of_rounds
+    num_of_rounds = choose_num_of_rounds
     puts "You are the #{starting_role == 'M' ? 'CODE MAKER' : 'CODE BREAKER'}"
 
-    [rounds, starting_role]
+    [num_of_rounds, starting_role]
   end
 
   def choose_num_of_rounds
     loop do
       print 'Number of Rounds: '
 
-      rounds = gets.chomp.to_i
+      num_of_rounds = gets.chomp.to_i
 
-      return rounds if rounds.even? && rounds >= 2
+      return num_of_rounds if num_of_rounds.even? && num_of_rounds >= 2
 
       puts 'Error: Number of rounds must be even and at least 2'
     end

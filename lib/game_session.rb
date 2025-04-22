@@ -4,8 +4,8 @@ require_relative 'human_player'
 require_relative 'computer_player'
 
 class GameSession
-  def initialize(rounds, starting_role)
-    @num_of_rounds = rounds
+  def initialize(num_of_rounds, starting_role)
+    @num_of_rounds = num_of_rounds
     @human = HumanPlayer.new
     @computer = ComputerPlayer.new
     setup_player_roles(starting_role)
