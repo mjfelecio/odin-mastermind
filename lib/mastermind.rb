@@ -10,6 +10,7 @@ class Mastermind
   def initialize
     @ui = MastermindUI.new
     @game_session = GameSession.new
+    @game_options = {}
   end
 
   def start_game
@@ -28,9 +29,9 @@ class Mastermind
   private
 
   def setup_game
-    setup_options = @ui.prompt_for_game_setup
-    @game_session.num_of_rounds = setup_options[:num_of_rounds]
-    @game_session.initial_role = setup_options[:initial_role]
+    player_preferences = @ui.prompt_for_game_setup
+    @game_options[:num_of_rounds] = player_preferences[:num_of_rounds]
+    @game_options[:initial_role] = player_preferences[:initial_role]
   end
 
   def print_title_info
