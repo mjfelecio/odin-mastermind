@@ -1,10 +1,6 @@
 # frozen_string_literal: false
 
-require_relative './feedback_processor'
-
 class ComputerPlayer
-  attr_accessor :role
-
   COLORS = %w[R O Y G B V].freeze
 
   def secret_code

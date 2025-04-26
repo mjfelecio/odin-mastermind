@@ -1,3 +1,7 @@
+# frozen_string_literal: false
+
+require_relative './feedback_processor'
+
 class MastermindRoundManager
   def initialize(code_breaker, secret_code)
     @secret_code = secret_code

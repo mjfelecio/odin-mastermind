@@ -59,7 +59,6 @@ class Mastermind
 
   def set_up_roles
     human_role = @game_options[:initial_role]
-    p human_role
     if human_role == :code_breaker
       @code_breaker = @human
       @code_maker = @computer
@@ -67,7 +66,5 @@ class Mastermind
       @code_breaker = @computer
       @code_maker = @human
     end
-    p "Breaker #{@code_breaker}"
-    p "Maker #{@code_maker}"
   end
 end
