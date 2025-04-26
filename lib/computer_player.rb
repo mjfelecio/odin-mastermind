@@ -7,7 +7,7 @@ class ComputerPlayer
 
   COLORS = %w[R O Y G B V].freeze
 
-  def generate_secret_code
+  def secret_code
     secret_code = ''
     4.times do
       secret_code << COLORS[rand(6)]
@@ -23,9 +23,5 @@ class ComputerPlayer
     sleep(1)
     puts guess
     guess
-  end
-
-  def provide_feedback(secret_code, guess)
-    FeedbackProcessor.process(secret_code, guess)
   end
 end

@@ -7,7 +7,7 @@ class HumanPlayer
 
   COLORS = %w[R O Y G B V].freeze
 
-  def prompt_for_secret_code
+  def secret_code
     puts 'Your secret code must be 4 letters (Ex. RGBV or BYOG)'
     print 'Enter your secret code: '
     secret_code = nil
@@ -31,10 +31,6 @@ class HumanPlayer
       print 'Invalid input, try again: '
     end
     guess
-  end
-
-  def provide_feedback(secret_code, guess)
-    FeedbackProcessor.process(secret_code, guess)
   end
 
   def valid_code?(code)

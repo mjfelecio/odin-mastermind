@@ -43,7 +43,11 @@ class MastermindUI
     loop do
       starting_role = gets.chomp
 
-      return starting_role if %w[M B].include?(starting_role)
+      if %w[M B].include?(starting_role)
+        role_as_sym = starting_role == 'B' ? :code_breaker : :code_maker
+
+        return role_as_sym
+      end
 
       print 'Invalid role, try again: '
     end
