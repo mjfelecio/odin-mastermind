@@ -31,6 +31,7 @@ class Mastermind
       round.start
       track_scores(round.fetch_result)
       @ui.display_score(@scores)
+      swap_player_role
     end
   end
 
