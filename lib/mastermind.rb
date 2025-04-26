@@ -30,6 +30,7 @@ class Mastermind
       round = MastermindRoundManager.new(@code_breaker, @secret_code)
       round.start
       track_scores(round.fetch_result)
+      @ui.display_score(@scores)
     end
   end
 

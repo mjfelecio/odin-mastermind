@@ -21,7 +21,23 @@ class MastermindUI
     { num_of_rounds: num_of_rounds, starting_role: starting_role }
   end
 
+  def display_score(score)
+    puts '|-----------------------|'
+    puts '|      Scoreboard       |'
+    puts '|-----------------------|'
+    puts '    Human     Computer   '
+    puts "  #{center_text(score[:human], 9)}   #{center_text(score[:computer], 9)}"
+  end
+
   private
+
+  def center_text(text, width)
+    text = text.to_s
+    total_padding = [width - text.length, 0].max
+    left_padding = total_padding / 2
+    right_padding = total_padding - left_padding
+    ' ' * left_padding + text + ' ' * right_padding
+  end
 
   # === User input functions ===
 
