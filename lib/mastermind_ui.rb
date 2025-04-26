@@ -12,13 +12,13 @@ class MastermindUI
     puts 'Type (X) to proceed with default settings'
 
     # Default settings
-    return { num_of_rounds: 4, starting_role: 'B' } if gets.chomp == 'X'
+    return { num_of_rounds: 4, initial_role: :code_breaker } if gets.chomp == 'X'
 
-    starting_role = choose_starting_role
+    initial_role = choose_initial_role
     num_of_rounds = choose_num_of_rounds
-    puts "You are the #{starting_role == 'M' ? 'CODE MAKER' : 'CODE BREAKER'}"
+    puts "You are the #{initial_role == :code_maker ? 'CODE MAKER' : 'CODE BREAKER'}"
 
-    { num_of_rounds: num_of_rounds, starting_role: starting_role }
+    { num_of_rounds: num_of_rounds, initial_role: initial_role }
   end
 
   def display_score(score)
@@ -53,15 +53,14 @@ class MastermindUI
     end
   end
 
-  def choose_starting_role
+  def choose_initial_role
     print 'Choose your role (B/M): '
 
     loop do
-      starting_role = gets.chomp
+      initial_role = gets.chomp
 
-      if %w[M B].include?(starting_role)
-        role_as_sym = starting_role == 'B' ? :code_breaker : :code_maker
-
+      if %w[M B].include?(initial_role)
+        role_as_sym = initial_role == 'B' ? :code_breaker : :code_maker
         return role_as_sym
       end
 

@@ -34,11 +34,6 @@ class Mastermind
     end
   end
 
-  # def display_result(winner)
-  #   puts 'You lost the game!' if winner == :computer
-  #   puts 'You won the game!' if winner == :human
-  # end
-
   private
 
   def create_secret_code
@@ -63,6 +58,7 @@ class Mastermind
 
   def set_up_roles
     human_role = @game_options[:initial_role]
+    p human_role
     if human_role == :code_breaker
       @code_breaker = @human
       @code_maker = @computer
