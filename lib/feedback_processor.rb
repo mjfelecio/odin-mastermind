@@ -15,7 +15,7 @@ class FeedbackProcessor
     check_red_pegs
     check_white_pegs
 
-    @feedback.shuffle
+    @feedback.shuffle.join
   end
 
   private
@@ -27,7 +27,7 @@ class FeedbackProcessor
     code_chars.each_with_index do |color, idx|
       next unless guess_chars[idx] == color
 
-      @feedback << 'red'
+      @feedback << '🔴'
       code_chars[idx] = nil
       guess_chars[idx] = nil
     end
@@ -42,7 +42,7 @@ class FeedbackProcessor
     @guess.chars.each do |color|
       next unless code_chars.include?(color)
 
-      @feedback << 'white'
+      @feedback << '⚪'
       idx = code_chars.find_index(color)
       code_chars[idx] = nil
     end
