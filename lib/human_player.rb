@@ -4,15 +4,15 @@ class HumanPlayer
   COLORS = %w[R O Y G B V].freeze
 
   def secret_code
-    puts 'Your secret code must be 4 letters (Ex. RGBV or BYOG)'
-    print 'Enter your secret code: '
     secret_code = nil
     loop do
+      print 'Enter your secret code: '
+
       secret_code = gets.chomp # Add a way to validate this later
 
       break if valid_code?(secret_code)
 
-      print 'Invalid secret code, try again: '
+      puts 'Invalid secret code, try again: '
     end
     secret_code
   end
