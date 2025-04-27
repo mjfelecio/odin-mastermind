@@ -2,17 +2,23 @@
 
 # Responsible for getting inputs and displaying outputs from the game
 class MastermindUI
-  def display_start_messages
+  def display_title_screen
     display_welcome_message
     display_rules
+
+    puts 'Press any letter to continue...'
+    gets
   end
 
   def prompt_for_game_setup
-    puts '~===> Game Setup <===~'
-    puts 'Type (X) to proceed with default settings'
+    puts '-----------------------------------'
+    puts '            Setup Game             '
+    puts '-----------------------------------'
+    puts 'Type (x) to proceed with default settings'
+    puts 'Number of Rounds: 2 | Initial Role: Code Breaker'
 
     # Default settings
-    return { num_of_rounds: 4, initial_role: :code_breaker } if gets.chomp == 'X'
+    return { num_of_rounds: 2, initial_role: :code_breaker } if gets.chomp == 'x'
 
     initial_role = choose_initial_role
     num_of_rounds = choose_num_of_rounds
@@ -54,7 +60,7 @@ class MastermindUI
   end
 
   def choose_initial_role
-    print 'Choose your role (B/M): '
+    print 'Choose your initial role (B/M): '
 
     loop do
       initial_role = gets.chomp
@@ -80,7 +86,7 @@ class MastermindUI
     puts '-----------------------------------'
     puts '            Game Rules             '
     puts '-----------------------------------'
-    puts '~ You must guess the secret code.'
+    puts '- You must guess the secret code.'
     puts '- The code is made of 4 colors.'
     puts '- Colors may repeat.'
     puts "- After each guess, you'll get hints:"

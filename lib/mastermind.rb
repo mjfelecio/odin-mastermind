@@ -21,7 +21,7 @@ class Mastermind
   end
 
   def start_game
-    @ui.display_start_messages
+    @ui.display_title_screen
     setup_game
 
     # Runs for however many rounds were set by the player
