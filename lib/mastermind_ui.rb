@@ -55,14 +55,13 @@ class MastermindUI
 
       return num_of_rounds if num_of_rounds.even? && num_of_rounds >= 2
 
-      puts 'Error: Number of rounds must be even and at least 2'
+      puts 'Number of rounds must be even and at least 2'
     end
   end
 
   def choose_initial_role
-    print 'Choose your initial role (B/M): '
-
     loop do
+      print 'Choose your initial role (B/M): '
       initial_role = gets.chomp
 
       if %w[M B].include?(initial_role)
@@ -70,7 +69,7 @@ class MastermindUI
         return role_as_sym
       end
 
-      print 'Invalid role, try again: '
+      puts 'Invalid role, try again'
     end
   end
 
