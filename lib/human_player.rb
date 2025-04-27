@@ -1,18 +1,18 @@
 # frozen_string_literal: false
 
 class HumanPlayer
-  COLORS = %w[R O Y G B V].freeze
+  VALID_CODES = %w[1 2 3 4 5 6].freeze
 
   def secret_code
     secret_code = nil
     loop do
       print 'Enter your secret code: '
 
-      secret_code = gets.chomp # Add a way to validate this later
+      secret_code = gets.chomp
 
       break if valid_code?(secret_code)
 
-      puts 'Invalid secret code, try again: '
+      puts 'Invalid secret code, try again.'
     end
     secret_code
   end
@@ -22,14 +22,14 @@ class HumanPlayer
     loop do
       guess = gets.chomp
 
-      break if guess.length == 4 && guess.chars.all? { |c| COLORS.include?(c) }
+      break if valid_code?(guess)
 
-      print 'Invalid input, try again: '
+      print 'Invalid guess, try again: '
     end
     guess
   end
 
   def valid_code?(code)
-    code.length == 4 && code.chars.all? { |c| COLORS.include?(c) }
+    code.length == 4 && code.chars.all? { |c| VALID_CODES.include?(c) }
   end
 end
