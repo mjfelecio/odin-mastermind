@@ -126,12 +126,17 @@ class MastermindUI
     puts '            Game Rules             '
     puts '-----------------------------------'
     puts '- You must guess the secret code.'
-    puts '- The code is made of 4 colors.'
-    puts '- Colors may repeat.'
+    puts '- The code is made of 4 numbers from 1-6.'
+    puts '- Numbers may repeat.'
     puts "- After each guess, you'll get hints:"
-    puts '  - A 🔴 hint for correct color and position.'
-    puts '  - A ⚪ hint for correct color but wrong position.'
+    puts '  - A 🔴 hint for correct number and position.'
+    puts '  - A ⚪ hint for correct number but wrong position.'
     puts '- You have 12 turns to crack the code!'
+    puts
+    puts '- After each round, the roles will swap!'
+    puts '- One round you will be the code breaker, the next the code maker.'
+    puts '- The player with the most total points after all rounds wins!'
+    puts
     puts 'Good luck!'
     puts '-----------------------------------'
   end
