@@ -3,6 +3,7 @@
 require_relative './feedback_processor'
 
 class RoundManager
+  include FeedbackProcessor
   def initialize(code_breaker, secret_code)
     @secret_code = secret_code
     @code_breaker = code_breaker
@@ -32,7 +33,7 @@ class RoundManager
         break
       end
 
-      puts "Feedback: #{FeedbackProcessor.process(@secret_code, guess)}"
+      puts "Feedback: #{process(@secret_code, guess)}"
     end
   end
 
