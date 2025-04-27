@@ -4,7 +4,7 @@
 class MastermindUI
   def display_start_messages
     display_welcome_message
-    display_game_rules
+    display_rules
   end
 
   def prompt_for_game_setup
@@ -71,10 +71,23 @@ class MastermindUI
   # === UI functions ===
 
   def display_welcome_message
-    puts 'Welcome to Mastermind Game'
+    puts '==================================='
+    puts '        Welcome to Mastermind!     '
+    puts '==================================='
   end
 
-  def display_game_rules
-    puts 'Placeholder for game rules'
+  def display_rules
+    puts '-----------------------------------'
+    puts '            Game Rules             '
+    puts '-----------------------------------'
+    puts '~ You must guess the secret code.'
+    puts '- The code is made of 4 colors.'
+    puts '- Colors may repeat.'
+    puts "- After each guess, you'll get hints:"
+    puts '  - A 🔴 hint for correct color and position.'
+    puts '  - A ⚪ hint for correct color but wrong position.'
+    puts '- You have 12 turns to crack the code!'
+    puts 'Good luck!'
+    puts '-----------------------------------'
   end
 end
