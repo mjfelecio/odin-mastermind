@@ -10,6 +10,38 @@ class MastermindUI
     gets
   end
 
+  def display_game_end_screen(won)
+    puts '==================================='
+    case won
+    when true
+      puts '🏆 YOU ARE THE WINNER!! 🏆'
+      puts
+      puts 'You dominated the battlefield of wits and cracked more codes!'
+      puts 'A true Mastermind! Your logical prowess reigns supreme!'
+      puts
+      puts 'Thank you for playing!'
+    when false
+      puts '💻 COMPUTER WINS! 💻'
+      puts
+      puts 'The machine outsmarted the human this time...'
+      puts 'But every defeat plants the seed for a greater comeback.'
+      puts 'Sharpen your mind and challenge again!'
+      puts
+      puts 'Thank you for playing!'
+    when :tie
+      puts "🤝 IT'S A DRAW! 🤝"
+      puts
+      puts 'What a tense and thrilling battle!'
+      puts 'Neither side could claim absolute victory today.'
+      puts 'Perhaps destiny awaits in a future rematch?'
+      puts
+      puts 'Thank you for playing!'
+    else
+      puts '⚠️ Unexpected end of game.'
+    end
+    puts '==================================='
+  end
+
   def prompt_for_game_setup
     puts '-----------------------------------'
     puts '            Setup Game             '
@@ -25,6 +57,14 @@ class MastermindUI
     puts "You are the #{initial_role == :code_maker ? 'CODE MAKER' : 'CODE BREAKER'}"
 
     { num_of_rounds: num_of_rounds, initial_role: initial_role }
+  end
+
+  def prompt_to_continue_playing
+    puts '-----------------------------------'
+    puts '   Would you like to play again?   '
+    puts '-----------------------------------'
+    print "Enter to play again or 'q' to quit: "
+    gets.chomp
   end
 
   def display_score(score)

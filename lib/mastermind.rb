@@ -24,6 +24,16 @@ class Mastermind
     @ui.display_title_screen
     setup_game
 
+    loop do
+      start_session
+      @ui.display_game_end_screen(won?)
+      exit if @ui.prompt_to_continue_playing == 'q'
+    end
+  end
+
+  private
+
+  def start_session
     # Runs for however many rounds were set by the player
     (1..@game_options[:num_of_rounds]).each do
       @secret_code = create_secret_code
@@ -35,10 +45,14 @@ class Mastermind
     end
   end
 
-  private
-
   def create_secret_code
     @code_maker.secret_code
+  end
+
+  def won?
+    return :tie if @scores[:human] == @scores[:computer]
+
+    @scores[:human] > @scores[:computer]
   end
 
   def track_scores(score)
