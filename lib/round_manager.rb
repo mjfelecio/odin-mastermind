@@ -2,7 +2,7 @@
 
 require_relative './feedback_processor'
 
-class MastermindRoundManager
+class RoundManager
   def initialize(code_breaker, secret_code)
     @secret_code = secret_code
     @code_breaker = code_breaker

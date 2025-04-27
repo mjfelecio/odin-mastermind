@@ -3,7 +3,7 @@
 require_relative 'human_player'
 require_relative 'computer_player'
 require_relative 'mastermind_ui'
-require_relative 'mastermind_round_manager'
+require_relative 'round_manager'
 
 # Class that handles the logic for the game
 class Mastermind
@@ -27,7 +27,7 @@ class Mastermind
     # Runs for however many rounds were set by the player
     (1..@game_options[:num_of_rounds]).each do
       @secret_code = create_secret_code
-      round = MastermindRoundManager.new(@code_breaker, @secret_code)
+      round = RoundManager.new(@code_breaker, @secret_code)
       round.start
       track_scores(round.fetch_result)
       @ui.display_score(@scores)
