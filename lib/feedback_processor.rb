@@ -3,8 +3,8 @@
 module FeedbackProcessor
   def process(secret_code, guess)
     feedback = []
-    code_chars = secret_code.chars
-    guess_chars = guess.chars
+    code_chars = secret_code.to_s.chars
+    guess_chars = guess.to_s.chars
 
     # Check for red pins
     code_chars.each_with_index do |color, idx|
@@ -16,14 +16,16 @@ module FeedbackProcessor
     end
 
     # Check for white pins
-    guess.chars.each do |color|
+    guess_chars.each do |color|
+      next if color.nil?
       next unless code_chars.include?(color)
 
       feedback << '⚪'
-      idx = code_chars.find_index(color)
-      code_chars[idx] = nil
+      code_idx = guess_chars.find_index(color)
+      code_chars[code_idx] = nil
+      guess_chars[code_idx] = nil
     end
 
-    feedback.shuffle.join
+    feedback.join
   end
 end
