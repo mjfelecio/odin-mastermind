@@ -30,7 +30,7 @@ class GuessingAlgoritm
 
     # If the candidate isn't in the valid codes, just use the candidates
     # from all possible secret codes, and then find the lowest number in it as the guess
-    guess = (valid_candidates.empty? ? candidates : valid_candidates).min
+    guess = (valid_candidates.empty? ? candidates : valid_candidates).min.to_s
     @previous_guess = guess
     guess
   end

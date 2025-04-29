@@ -4,6 +4,7 @@ require_relative './feedback_processor'
 
 class RoundManager
   include FeedbackProcessor
+
   def initialize(code_breaker, secret_code)
     @secret_code = secret_code
     @code_breaker = code_breaker
@@ -26,7 +27,7 @@ class RoundManager
     (1..@num_of_attempts).each do |row_num|
       print "Row ##{row_num} Guess: "
 
-      guess = fetch_guess(@prev_feedback)
+      puts guess = @code_breaker.guess(@prev_feedback)
 
       if solved?(guess)
         # The current row will be the score of the code maker
@@ -34,14 +35,9 @@ class RoundManager
         break
       end
 
-      feedback = process(@secret_code, guess)
-      @prev_feedback = feedback
-      puts "Feedback: #{feedback}"
+      @prev_feedback = process(@secret_code, guess)
+      puts "Feedback: #{@prev_feedback}"
     end
-  end
-
-  def fetch_guess(feedback)
-    @code_breaker.guess(feedback)
   end
 
   def solved?(guess)

@@ -5,6 +5,10 @@ require_relative './guessing_algorithm'
 class ComputerPlayer
   VALID_CODES = %w[1 2 3 4 5 6].freeze
 
+  def initialize
+    @guesser = GuessingAlgoritm.new
+  end
+
   def secret_code
     secret_code = ''
     4.times do
@@ -15,6 +19,6 @@ class ComputerPlayer
   end
 
   def guess(feedback)
-    GuessingAlgoritm.new.guess(feedback)
+    @guesser.guess(feedback)
   end
 end
