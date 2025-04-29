@@ -18,4 +18,14 @@ class GuessingAlgoritm
     # Filter the codes that would give the same feedback if they WERE the secret code
     codes.select { |code| process(code, prev_guess) == feedback }
   end
+
+  def find_worst_feedback(guess, possible_codes)
+    # Compares the guess to the each of the possible secret codes
+    # to see the worst possible outcome for that guess.
+    # (This is so that even if we take the worst possible feedback
+    # we still guarantee that it is the best choice)
+    feedbacks = possible_codes.map { |code| process(code, guess) }
+    groups = feedbacks.group_by { |fb| fb }
+    groups.values.map(&:size).max
+  end
 end
