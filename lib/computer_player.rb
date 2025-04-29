@@ -1,5 +1,7 @@
 # frozen_string_literal: false
 
+require_relative './guessing_algorithm'
+
 class ComputerPlayer
   VALID_CODES = %w[1 2 3 4 5 6].freeze
 
@@ -12,13 +14,7 @@ class ComputerPlayer
     secret_code
   end
 
-  def guess
-    guess = ''
-    4.times do
-      guess << VALID_CODES[rand(6)]
-    end
-    sleep(1)
-    puts guess
-    guess
+  def guess(feedback)
+    GuessingAlgoritm.new.guess(feedback)
   end
 end
