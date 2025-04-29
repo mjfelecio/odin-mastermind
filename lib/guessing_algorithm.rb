@@ -5,9 +5,32 @@ class GuessingAlgoritm
 
   def initialize
     @all_secret_code_combinations = generate_all_codes
+    @valid_codes = @all_secret_code_combinations.dup
+    @previous_guess = '1122'
   end
 
-  def guess
+  def guess(feedback)
+    return '1122' if feedback == :first_guess
+
+    @valid_codes = filter_valid_codes(@valid_codes, @previous_guess, feedback)
+
+    # Score all the possible codes
+    scores = @all_secret_code_combinations.map do |possible_guess|
+      find_worst_feedback(possible_guess, @valid_codes)
+    end
+
+    # Gets lowest score (meaning it narrows down the secret code better because it has less possibilities)
+    min_score = scores.min
+    candidates = @all_secret_code_combinations.select.with_index { |_, i| scores[i] == min_score }
+
+    # Filters the candidates to only those that are considered as valid codes using intersection
+    valid_candidates = candidates & @valid_codes
+
+    # If the candidate isn't in the valid codes, just use the candidates
+    # from all possible secret codes, and then find the lowest number in it as the guess
+    guess = (valid_candidates.empty? ? candidates : valid_candidates).min
+    @previous_guess = guess
+    guess
   end
 
   def generate_all_codes
