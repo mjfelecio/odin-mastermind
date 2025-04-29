@@ -26,7 +26,7 @@ class RoundManager
     (1..@num_of_attempts).each do |row_num|
       print "Row ##{row_num} Guess: "
 
-      guess = fetch_guess(feedback)
+      guess = fetch_guess(@prev_feedback)
 
       if solved?(guess)
         # The current row will be the score of the code maker

@@ -17,7 +17,7 @@ class HumanPlayer
     secret_code
   end
 
-  def guess
+  def guess(feedback)
     guess = ''
     loop do
       guess = gets.chomp
