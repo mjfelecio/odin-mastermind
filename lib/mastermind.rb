@@ -61,7 +61,11 @@ class Mastermind
   end
 
   def swap_player_role
-    @code_maker, @code_breaker = @code_breaker, @code_maker
+    new_code_maker = @code_breaker.class.new
+    new_code_breaker = @code_maker.class.new
+
+    @code_maker = new_code_maker
+    @code_breaker = new_code_breaker
   end
 
   def setup_game
