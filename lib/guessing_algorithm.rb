@@ -34,6 +34,8 @@ class GuessingAlgoritm
     @previous_guess = (valid_candidates.empty? ? candidates : valid_candidates).min.to_s
   end
 
+  private
+
   def generate_all_codes
     (1111..6666).to_a.select { |num| num.to_s.chars.all? { |c| c.to_i.between?(1, 6) } }
   end
