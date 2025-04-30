@@ -5,8 +5,9 @@ require_relative './feedback_processor'
 class RoundManager
   include FeedbackProcessor
 
-  def initialize(code_breaker, secret_code)
-    @secret_code = secret_code
+  def initialize(code_maker, code_breaker)
+    @secret_code = nil
+    @code_maker = code_maker
     @code_breaker = code_breaker
     @code_maker_score = 12
     @num_of_attempts = 12
@@ -14,6 +15,7 @@ class RoundManager
   end
 
   def start
+    @secret_code = create_secret_code
     handle_breaker_guessing
   end
 
@@ -38,6 +40,10 @@ class RoundManager
       @prev_feedback = process(@secret_code, guess)
       puts "Feedback: #{@prev_feedback}"
     end
+  end
+
+  def create_secret_code
+    @code_maker.secret_code
   end
 
   def solved?(guess)

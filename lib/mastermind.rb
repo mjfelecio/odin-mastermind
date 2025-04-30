@@ -36,17 +36,12 @@ class Mastermind
   def start_session
     # Runs for however many rounds were set by the player
     (1..@game_options[:num_of_rounds]).each do
-      @secret_code = create_secret_code
-      round = RoundManager.new(@code_breaker, @secret_code)
+      round = RoundManager.new(@code_maker, @code_breaker)
       round.start
       track_scores(round.fetch_result)
       @ui.display_score(@scores)
       swap_player_role
     end
-  end
-
-  def create_secret_code
-    @code_maker.secret_code
   end
 
   def won?
