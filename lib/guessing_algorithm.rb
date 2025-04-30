@@ -2,6 +2,7 @@
 
 require_relative './feedback_processor'
 
+# Uses the Knuth's algorithm to guess the secret code
 class GuessingAlgoritm
   include FeedbackProcessor
 
@@ -30,9 +31,7 @@ class GuessingAlgoritm
 
     # If the candidate isn't in the valid codes, just use the candidates
     # from all possible secret codes, and then find the lowest number in it as the guess
-    guess = (valid_candidates.empty? ? candidates : valid_candidates).min.to_s
-    @previous_guess = guess
-    guess
+    @previous_guess = (valid_candidates.empty? ? candidates : valid_candidates).min.to_s
   end
 
   def generate_all_codes
