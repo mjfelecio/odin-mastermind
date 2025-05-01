@@ -38,7 +38,8 @@ class RoundManager
       end
 
       @feedback = process(@secret_code, guess)
-      puts "Feedback: #{@feedback}"
+      # Shuffles the feedback when displaying them
+      puts "Feedback: #{@feedback.chars.shuffle.join}"
     end
   end
 
