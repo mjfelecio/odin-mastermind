@@ -21,10 +21,10 @@ class Mastermind
   end
 
   def start_game
-    @ui.display_title_screen
-    setup_game
-
     loop do
+      @ui.display_title_screen
+      setup_game
+
       start_session
       @ui.display_game_end_screen(won?)
       exit if @ui.prompt_to_continue_playing == 'q'
