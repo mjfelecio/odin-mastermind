@@ -9,10 +9,8 @@ require_relative 'round_manager'
 class Mastermind
   def initialize
     @ui = MastermindUI.new
-    @human = HumanPlayer.new
-    @computer = ComputerPlayer.new
-    @code_breaker = ''
-    @code_maker = ''
+    @code_breaker = nil
+    @code_maker = nil
     @game_options = {}
     @scores = {
       human: 0,
@@ -51,7 +49,7 @@ class Mastermind
   end
 
   def track_scores(score)
-    code_maker = @code_breaker == @human ? :computer : :human
+    code_maker = @code_breaker.instance_of?(HumanPlayer) ? :computer : :human
     @scores[code_maker] += score
   end
 
@@ -73,11 +71,11 @@ class Mastermind
   def set_up_roles
     human_role = @game_options[:initial_role]
     if human_role == :code_breaker
-      @code_breaker = @human
-      @code_maker = @computer
+      @code_breaker = HumanPlayer.new
+      @code_maker = ComputerPlayer.new
     else
-      @code_breaker = @computer
-      @code_maker = @human
+      @code_breaker = ComputerPlayer.new
+      @code_maker = HumanPlayer.new
     end
   end
 end
