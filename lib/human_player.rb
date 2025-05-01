@@ -3,7 +3,7 @@
 class HumanPlayer
   VALID_CODES = %w[1 2 3 4 5 6].freeze
 
-  def secret_code
+  def create_secret_code
     secret_code = nil
     loop do
       print 'Enter your secret code: '
@@ -17,7 +17,7 @@ class HumanPlayer
     secret_code
   end
 
-  def guess(feedback)
+  def make_guess(_feedback)
     guess = ''
     loop do
       guess = gets.chomp

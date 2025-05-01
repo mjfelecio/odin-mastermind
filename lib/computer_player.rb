@@ -9,7 +9,7 @@ class ComputerPlayer
     @guesser = GuessingAlgoritm.new
   end
 
-  def secret_code
+  def create_secret_code
     secret_code = ''
     4.times do
       secret_code << VALID_CODES[rand(6)]
@@ -18,7 +18,7 @@ class ComputerPlayer
     secret_code
   end
 
-  def guess(feedback)
+  def make_guess(feedback)
     @guesser.guess(feedback)
   end
 end
