@@ -2,6 +2,7 @@
 
 require_relative './feedback_processor'
 
+# Handles a single round of a Mastermind Game
 class RoundManager
   include FeedbackProcessor
 
@@ -10,12 +11,11 @@ class RoundManager
     @code_maker = code_maker
     @code_breaker = code_breaker
     @code_maker_score = 12
-    @num_of_attempts = 12
     @prev_feedback = :first_guess
   end
 
   def start
-    @secret_code = create_secret_code
+    create_secret_code
     handle_breaker_guessing
   end
 
@@ -26,7 +26,7 @@ class RoundManager
   private
 
   def handle_breaker_guessing
-    (1..@num_of_attempts).each do |row_num|
+    (1..12).each do |row_num|
       print "Row ##{row_num} Guess: "
 
       puts guess = @code_breaker.guess(@prev_feedback)
@@ -43,7 +43,7 @@ class RoundManager
   end
 
   def create_secret_code
-    @code_maker.secret_code
+    @secret_code = @code_maker.secret_code
   end
 
   def solved?(guess)
