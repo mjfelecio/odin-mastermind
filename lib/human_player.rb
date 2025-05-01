@@ -29,6 +29,8 @@ class HumanPlayer
     guess
   end
 
+  private
+
   def valid_code?(code)
     code.length == 4 && code.chars.all? { |c| VALID_CODES.include?(c) }
   end
