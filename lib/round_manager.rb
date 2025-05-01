@@ -11,7 +11,7 @@ class RoundManager
     @code_maker = code_maker
     @code_breaker = code_breaker
     @code_maker_score = 12
-    @prev_feedback = nil
+    @feedback = nil
   end
 
   def start
@@ -29,7 +29,7 @@ class RoundManager
     (1..12).each do |row_num|
       print "Row ##{row_num} Guess: "
 
-      puts guess = @code_breaker.guess(@prev_feedback)
+      puts guess = @code_breaker.guess(@feedback)
 
       if solved?(guess)
         # The current row will be the score of the code maker
@@ -37,8 +37,8 @@ class RoundManager
         break
       end
 
-      @prev_feedback = process(@secret_code, guess)
-      puts "Feedback: #{@prev_feedback}"
+      @feedback = process(@secret_code, guess)
+      puts "Feedback: #{@feedback}"
     end
   end
 
