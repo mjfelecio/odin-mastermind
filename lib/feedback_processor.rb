@@ -1,5 +1,6 @@
 # frozen_string_literal: false
 
+# Handles processing the guess to give feedback
 module FeedbackProcessor
   def process(secret_code, guess)
     @feedback = []
@@ -8,7 +9,6 @@ module FeedbackProcessor
 
     check_red_pins
     check_white_pins
-
     @feedback.join
   end
 
@@ -23,14 +23,13 @@ module FeedbackProcessor
   end
 
   def check_white_pins
-    @guess_chars.each do |color|
+    @guess_chars.each_with_index do |color, idx|
       next if color.nil?
       next unless @code_chars.include?(color)
 
       @feedback << '⚪'
-      code_idx = @guess_chars.find_index(color)
-      @code_chars[code_idx] = nil
-      @guess_chars[code_idx] = nil
+      @code_chars[idx] = nil
+      @guess_chars[idx] = nil
     end
   end
 end
