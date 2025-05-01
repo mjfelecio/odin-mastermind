@@ -13,7 +13,9 @@ class GuessingAlgoritm
   end
 
   def guess(feedback)
-    return '1122' if feedback == :first_guess
+    # This line ensures the first guess is always '1122' as per Knuth's algorithm.
+    # Slightly hacky, but it keeps the responsibility of managing guess state within the class itself.
+    return '1122' if @previous_guess == '1122'
 
     @valid_codes = filter_valid_codes(@valid_codes, @previous_guess, feedback)
 

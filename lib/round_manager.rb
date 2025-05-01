@@ -11,7 +11,7 @@ class RoundManager
     @code_maker = code_maker
     @code_breaker = code_breaker
     @code_maker_score = 12
-    @prev_feedback = :first_guess
+    @prev_feedback = nil
   end
 
   def start
