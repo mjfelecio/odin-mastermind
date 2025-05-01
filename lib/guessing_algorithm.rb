@@ -10,12 +10,15 @@ class GuessingAlgoritm
     @all_secret_code_combinations = generate_all_codes
     @valid_codes = @all_secret_code_combinations.dup
     @previous_guess = '1122'
+    @first_guess = true
   end
 
   def guess(feedback)
     # This line ensures the first guess is always '1122' as per Knuth's algorithm.
-    # Slightly hacky, but it keeps the responsibility of managing guess state within the class itself.
-    return '1122' if @previous_guess == '1122'
+    if @first_guess
+      @first_guess = false
+      return '1122'
+    end
 
     @valid_codes = filter_valid_codes(@valid_codes, @previous_guess, feedback)
 
