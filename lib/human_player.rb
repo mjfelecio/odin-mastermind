@@ -4,29 +4,25 @@ class HumanPlayer
   VALID_CODES = %w[1 2 3 4 5 6].freeze
 
   def create_secret_code
-    secret_code = nil
     loop do
-      print 'Enter your secret code: '
-
+      print 'Enter your secret code (4 digits from 1-6): '
       secret_code = gets.chomp
 
-      break if valid_code?(secret_code)
+      return secret_code if valid_code?(code)
 
-      puts 'Invalid secret code, try again.'
+      puts 'Invalid code! Must be 4 digits, each between 1-6.'
     end
-    secret_code
   end
 
-  def make_guess(_feedback)
-    guess = ''
+  def make_guess(feedback)
     loop do
+      print 'Enter your guess (4 digits from 1-6): '
       guess = gets.chomp
 
-      break if valid_code?(guess)
+      return guess if valid_code?(guess)
 
-      print 'Invalid guess, try again: '
+      puts 'Invalid guess! Must be 4 digits, each between 1-6.'
     end
-    guess
   end
 
   private
