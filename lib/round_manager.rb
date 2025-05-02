@@ -33,16 +33,16 @@ class RoundManager
       @code_breaker.instance_of?(HumanPlayer) && print("Attempt ##{row_num}: ")
 
       guess = @code_breaker.make_guess(feedback)
-
-      if solved?(guess)
-        # The current row will be the score of the code maker
-        @code_maker_score = row_num
-        break
-      end
-
       feedback = process(@secret_code, guess)
+
       # Shuffles the feedback when displaying them
       puts "Feedback: #{feedback.chars.shuffle.join}"
+
+      next unless solved?(guess)
+
+      # The current row will be the score of the code maker
+      @code_maker_score = row_num
+      break
     end
   end
 
