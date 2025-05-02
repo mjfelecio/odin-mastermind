@@ -33,7 +33,8 @@ class Mastermind
 
   def start_session
     # Runs for however many rounds were set by the player
-    (1..@game_options[:num_of_rounds]).each do
+    (1..@game_options[:num_of_rounds]).each do |round_num|
+      @ui.display_round_start(round_num, current_role)
       round = RoundManager.new(@code_maker, @code_breaker)
       round.start
       track_scores(round.fetch_result)
@@ -77,5 +78,9 @@ class Mastermind
       @code_breaker = ComputerPlayer.new
       @code_maker = HumanPlayer.new
     end
+  end
+
+  def current_role
+    @code_breaker.instance_of?(HumanPlayer) ? :code_breaker : :code_maker
   end
 end

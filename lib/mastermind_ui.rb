@@ -106,6 +106,16 @@ class MastermindUI
     gets
   end
 
+  def display_round_start(round_number, role)
+    clear_screen
+    puts '==================================='
+    puts "              ROUND #{round_number}          "
+    puts '==================================='
+    puts "     You are the #{role.to_s.upcase.gsub('_', ' ')}"
+    puts '-----------------------------------'
+    sleep(1)
+  end
+
   private
 
   def center_text(text, width)
@@ -188,3 +198,7 @@ class MastermindUI
     puts "\n" * 5
   end
 end
+
+ui = MastermindUI.new
+
+ui.display_round_start(1, :code_breaker)

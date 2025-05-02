@@ -1,6 +1,7 @@
 # frozen_string_literal: false
 
 require_relative './feedback_processor'
+require_relative './mastermind_ui'
 
 # Handles a single round of a Mastermind Game
 class RoundManager
@@ -11,7 +12,7 @@ class RoundManager
     @code_maker = code_maker
     @code_breaker = code_breaker
     @code_maker_score = 12
-    @feedback = nil
+    @ui = MastermindUI.new
   end
 
   def start
@@ -26,6 +27,7 @@ class RoundManager
   private
 
   def handle_breaker_guessing
+    feedback = nil
     (1..12).each do |row_num|
       print "Row ##{row_num} Guess: "
 
@@ -37,9 +39,9 @@ class RoundManager
         break
       end
 
-      @feedback = process(@secret_code, guess)
+      feedback = process(@secret_code, guess)
       # Shuffles the feedback when displaying them
-      puts "Feedback: #{@feedback.chars.shuffle.join}"
+      puts "Feedback: #{feedback.chars.shuffle.join}"
     end
   end
 
