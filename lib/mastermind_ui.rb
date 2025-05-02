@@ -74,7 +74,6 @@ class MastermindUI
   end
 
   def prompt_to_continue_playing
-    clear_screen
     puts '-----------------------------------'
     puts '   Would you like to play again?   '
     puts '-----------------------------------'
@@ -126,7 +125,6 @@ class MastermindUI
       puts '   Code maker scored maximum 12 points!'
     end
     puts '==================================='
-    sleep(3)
   end
 
   private
