@@ -113,7 +113,6 @@ class MastermindUI
     puts "     You are the #{role.to_s.upcase.gsub('_', ' ')}"
     puts '-----------------------------------'
     role == :code_breaker ? display_code_breaker_instructions : display_code_maker_instructions
-    sleep(1)
   end
 
   def display_round_result(score)
@@ -127,7 +126,7 @@ class MastermindUI
       puts '   Code maker scored maximum 12 points!'
     end
     puts '==================================='
-    sleep(2)
+    sleep(3)
   end
 
   private
