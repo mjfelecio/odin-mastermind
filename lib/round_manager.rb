@@ -29,7 +29,7 @@ class RoundManager
   def handle_breaker_guessing
     feedback = nil
     (1..12).each do |row_num|
-      print "Attempt ##{row_num}: "
+      @code_breaker.instance_of?(HumanPlayer) && print("Attempt ##{row_num}: ")
 
       guess = @code_breaker.make_guess(feedback)
 

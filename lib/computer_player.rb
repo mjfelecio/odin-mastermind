@@ -18,8 +18,25 @@ class ComputerPlayer
   end
 
   def make_guess(feedback)
+    display_computer_thinking
     guess = @guesser.guess(feedback)
-    puts guess
+    display_computer_guess(guess)
     guess
+  end
+
+  private
+
+  def display_computer_thinking
+    print 'Computer is analyzing the feedback'
+    3.times do
+      print '.'
+      sleep(0.5)
+    end
+    puts
+  end
+
+  def display_computer_guess(guess)
+    puts "Computer guesses: #{guess}"
+    sleep(1)
   end
 end
