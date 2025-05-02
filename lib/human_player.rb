@@ -8,7 +8,7 @@ class HumanPlayer
       print 'Enter your secret code (4 digits from 1-6): '
       secret_code = gets.chomp
 
-      return secret_code if valid_code?(code)
+      return secret_code if valid_code?(secret_code)
 
       puts 'Invalid code! Must be 4 digits, each between 1-6.'
     end
