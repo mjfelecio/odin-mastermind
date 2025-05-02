@@ -84,12 +84,11 @@ class MastermindUI
   end
 
   def display_score(score)
-    clear_screen
     puts '|-------------------------|'
     puts '|       Scoreboard        |'
     puts '|-------------------------|'
-    puts '      Human      Computer   '
-    puts "    #{center_text(score[:human], 9)}     #{center_text(score[:computer], 9)}"
+    puts '     Human      Computer   '
+    puts "    #{center_text(score[:human], 8)}     #{center_text(score[:computer], 8)}"
     puts '|-------------------------|'
 
     # Show who's currently winning
@@ -115,6 +114,20 @@ class MastermindUI
     puts '-----------------------------------'
     role == :code_breaker ? display_code_breaker_instructions : display_code_maker_instructions
     sleep(1)
+  end
+
+  def display_round_result(score)
+    was_solved = score < 12
+    puts '==================================='
+    if was_solved
+      puts "   Code cracked in #{score} attempts!"
+      puts "   Code maker scored #{score} points."
+    else
+      puts '   Code was not cracked!'
+      puts '   Code maker scored maximum 12 points!'
+    end
+    puts '==================================='
+    sleep(2)
   end
 
   private

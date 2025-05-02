@@ -18,6 +18,7 @@ class RoundManager
   def start
     create_secret_code
     handle_breaker_guessing
+    @ui.display_round_result(@code_maker_score)
   end
 
   def fetch_result
