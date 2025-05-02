@@ -29,9 +29,9 @@ class RoundManager
   def handle_breaker_guessing
     feedback = nil
     (1..12).each do |row_num|
-      print "Row ##{row_num} Guess: "
+      print "Attempt ##{row_num}: "
 
-      puts guess = @code_breaker.make_guess(@feedback)
+      puts guess = @code_breaker.make_guess(feedback)
 
       if solved?(guess)
         # The current row will be the score of the code maker

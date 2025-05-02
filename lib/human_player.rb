@@ -5,7 +5,7 @@ class HumanPlayer
 
   def create_secret_code
     loop do
-      print 'Enter your secret code (4 digits from 1-6): '
+      print 'Enter your secret code: '
       secret_code = gets.chomp
 
       return secret_code if valid_code?(secret_code)
@@ -16,7 +16,6 @@ class HumanPlayer
 
   def make_guess(feedback)
     loop do
-      print 'Enter your guess (4 digits from 1-6): '
       guess = gets.chomp
 
       return guess if valid_code?(guess)

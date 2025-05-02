@@ -114,6 +114,7 @@ class MastermindUI
     puts "     You are the #{role.to_s.upcase.gsub('_', ' ')}"
     puts '-----------------------------------'
     sleep(1)
+    role == :code_breaker ? display_code_breaker_instructions : display_code_maker_instructions
   end
 
   private
@@ -197,8 +198,18 @@ class MastermindUI
   rescue StandardError
     puts "\n" * 5
   end
+
+  def display_code_maker_instructions
+    puts 'Create a secret code for the computer to guess.'
+    puts 'The code must be 4 digits, each from 1-6.'
+    puts 'The computer will have 12 attempts to guess it.'
+    puts '-----------------------------------'
+  end
+
+  def display_code_breaker_instructions
+    puts 'Try to guess the computer\'s secret code.'
+    puts 'Enter 4 digits (1-6) for each guess.'
+    puts 'You have 12 attempts to crack the code!'
+    puts '-----------------------------------'
+  end
 end
-
-ui = MastermindUI.new
-
-ui.display_round_start(1, :code_breaker)

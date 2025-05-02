@@ -14,7 +14,6 @@ class ComputerPlayer
     4.times do
       secret_code << VALID_CODES[rand(6)]
     end
-    puts '~> The computer has decided on a secret code <~'
     secret_code
   end
 
