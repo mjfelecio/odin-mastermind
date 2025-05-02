@@ -51,7 +51,7 @@ class MastermindUI
     puts '-----------------------------------'
     puts 'Type (x) to proceed with default settings'
     puts 'Number of Rounds: 2 | Initial Role: Code Breaker'
-    puts
+    puts '-----------------------------------'
 
     # Default settings
     input = gets.chomp.downcase
@@ -113,8 +113,8 @@ class MastermindUI
     puts '==================================='
     puts "     You are the #{role.to_s.upcase.gsub('_', ' ')}"
     puts '-----------------------------------'
-    sleep(1)
     role == :code_breaker ? display_code_breaker_instructions : display_code_maker_instructions
+    sleep(1)
   end
 
   private

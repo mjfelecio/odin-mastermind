@@ -31,7 +31,7 @@ class RoundManager
     (1..12).each do |row_num|
       print "Attempt ##{row_num}: "
 
-      puts guess = @code_breaker.make_guess(feedback)
+      guess = @code_breaker.make_guess(feedback)
 
       if solved?(guess)
         # The current row will be the score of the code maker

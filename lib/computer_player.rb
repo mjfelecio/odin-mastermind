@@ -18,6 +18,8 @@ class ComputerPlayer
   end
 
   def make_guess(feedback)
-    @guesser.guess(feedback)
+    guess = @guesser.guess(feedback)
+    puts guess
+    guess
   end
 end
